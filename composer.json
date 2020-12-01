@@ -1,7 +1,7 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "virchow/virlumen-installer",
+    "description": "The Laravel Lumen Framework Modify by virchow.",
+    "keywords": ["framework", "laravel", "lumen", "virlumen-installer"],
     "license": "MIT",
     "type": "project",
     "require": {
