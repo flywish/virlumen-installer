@@ -482,4 +482,11 @@ class OptionalPackages
         $content = "\n\n" . implode($content, "\n");
         file_put_contents($envPath, $content, 8);
     }
+
+    /**
+     * 展示使用说明
+     */
+    public function showInstructions(){
+        $this->io->write('<info>Now you can visit this website (https://www.virchow.cn) to perfect your project</info>');
+    }
 }

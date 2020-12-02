@@ -16,5 +16,6 @@ class Script
         $installer->updateRootPackage();
         $installer->removeInstallerFromDefinition();
         $installer->finalizePackage();
+        $installer->showInstructions();
     }
 }
