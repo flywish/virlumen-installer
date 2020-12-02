@@ -146,7 +146,7 @@ $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 // laravel-log-viewer
-$app->register(Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class);
+// $app->register(Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
