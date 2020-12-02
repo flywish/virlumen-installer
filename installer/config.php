@@ -10,6 +10,21 @@ return [
         ],
         'illuminate/redis' => [
             'version' => '^8.16'
+        ],
+        'sentry/sentry-laravel' => [
+            'version' => '^2.1'
+        ],
+        'palanik/lumen-cors' => [
+            'version' => '^0.0.3'
+        ],
+        'alibabacloud/client' => [
+            'version' => '^1.5'
+        ],
+        'aliyuncs/oss-sdk-php' => [
+            'version' => '^2.3'
+        ],
+        'microsoft/azure-storage-blob' => [
+            'version' => '^1.5'
         ]
     ],
     'require-dev' => [
@@ -30,14 +45,14 @@ return [
                         'resources/dingo-api/api.php' => 'config/api.php',
                     ],
                     'env' => [
-                        'API_STANDARDS_TREE' => 'x',
-                        'API_SUBTYPE' => 'virlumen',
-                        'API_PREFIX' => 'api',
-                        'API_VERSION' => 'v1',
-                        'API_NAME' => 'virLumen API',
-                        'API_CONDITIONAL_REQUEST' => 'false',
-                        'API_STRICT' => 'false',
-                        'API_DEBUG' => 'true',
+                        'API_STANDARDS_TREE' => '',
+                        'API_SUBTYPE' => '',
+                        'API_PREFIX' => '',
+                        'API_VERSION' => '',
+                        'API_NAME' => '',
+                        'API_CONDITIONAL_REQUEST' => false,
+                        'API_STRICT' => false,
+                        'API_DEBUG' => true,
                         'API_DEFAULT_FORMAT' => 'json',
                     ]
                 ],
@@ -59,7 +74,7 @@ return [
                         'resources/jwt-auth/jwt.php' => 'config/jwt.php',
                     ],
                     'env' => [
-                        'JWT_SECRET ' => '0Qe3X9D5KcqmFpQi3N1BYQugUw2h1ZIw7xlMJP1ULpEFbBH52G6iPkWASh3R6tak',
+                        'JWT_SECRET ' => '',
                         'JWT_TTL' => 60
                     ]
                 ],
@@ -94,10 +109,85 @@ return [
                         'REDIS_HOST' => '127.0.0.1',
                         'REDIS_PASSWORD' => null,
                         'REDIS_PORT' => 6379,
-                        'REDIS_DB' => 2
+                        'REDIS_DB' => 0
                     ]
                 ],
             ],
-        ]
+        ],
+        'sentry' => [
+            'question' => 'Do you want to use sentry to log errors ?',
+            'default' => 'y',
+            'required' => false,
+            'custom-package' => false,
+            'options' => [
+                'y' => [
+                    'name' => 'yes',
+                    'packages' => [
+                        'sentry/sentry-laravel',
+                    ],
+                    'resources' => [],
+                    'env' => [
+                        'SENTRY_ENABLE' => '1',
+                        'SENTRY_LARAVEL_DSN' => ''
+                    ]
+                ],
+            ],
+        ],
+        'cors' => [
+            'question' => 'Do you want to allow this site to cross domains ?',
+            'default' => 'y',
+            'required' => false,
+            'custom-package' => false,
+            'options' => [
+                'y' => [
+                    'name' => 'yes',
+                    'packages' => [
+                        'palanik/lumen-cors',
+                    ],
+                    'resources' => []
+                ],
+            ],
+        ],
+        'oss' => [
+            'question' => 'Which storage do you need ?',
+            'default' => '1',
+            'required' => false,
+            'custom-package' => true,
+            'options' => [
+                '1' => [
+                    'name' => 'aliyun-oss',
+                    'packages' => [
+                        'alibabacloud/client',
+                        'aliyuncs/oss-sdk-php',
+                    ],
+                    'resources' => [
+                        'resources/oss/alioss.php' => 'config/alioss.php',
+                    ],
+                    'env' => [
+                        'ALIOSS_SERVER' => '',
+                        'ALIOSS_SERVERINTERNAL' => '',
+                        'ALIOSS_KEYID' => '',
+                        'ALIOSS_KEYSECRET' => '',
+                        'ALIOSS_BUCKETNAME' => '',
+                        'ALIOSS_BUCKET_HTTP_LINK' => '',
+                        'ALIOSS_BUCKET_HTTPS_LINK' => '',
+                        'ALIOSS_EXPIRE_TIME' => '3600',
+                    ]
+                ],
+                '2' => [
+                    'name' => 'azure-storage-blob',
+                    'packages' => [
+                        'microsoft/azure-storage-blob',
+                    ],
+                    'resources' => [],
+                    'env' => [
+                        'AZURE_ACCOUNT_NAME' => '',
+                        'AZURE_ACCOUNT_KEY' => '',
+                        'AZURE_ENDPOINT' => '',
+                        'AZURE_CONTAINER' => ''
+                    ]
+                ],
+            ],
+        ],
     ],
 ];

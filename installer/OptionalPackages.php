@@ -236,7 +236,6 @@ class OptionalPackages
                 }
             }
             // Modify env file
-            // TODO :: 编辑env 文件
             if(isset($question['options'][$answer]) && isset($question['options'][$answer]['env'])){
                 $this->modifyEnv($question['options'][$answer]['env']);
             }
