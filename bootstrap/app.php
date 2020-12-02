@@ -2,8 +2,32 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+/*
+|--------------------------------------------------------------------------
+| Load the Environment Variables
+|--------------------------------------------------------------------------
+|
+| In docker environment, the PROD environment is directly copied from the image of the UAT environment
+| and the env file cannot be modified directly, so we made three env file here
+| Or you can decide whether to apply the following code as you wish
+|
+*/
+
+$environ = $_SERVER['environment'] ?? 'dev';
+switch ($environ) {
+    case 'uat':
+        $configName = '.env.uat';
+        break;
+    case 'prod':
+        $configName = '.env.prod';
+        break;
+    default:
+        $configName = '.env';
+        break;
+}
+
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
-    dirname(__DIR__)
+    dirname(__DIR__), $configName
 ))->bootstrap();
 
 date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
@@ -23,9 +47,25 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
+$app->withEloquent();
 
-// $app->withEloquent();
+/*
+|--------------------------------------------------------------------------
+| Change The Default Storage Path
+|--------------------------------------------------------------------------
+|
+| If you want to deploy this project in a docker environment
+| please modify the default storage directory to avoid the original directory be destroy when the project is redistributed
+| Or you can decide whether to apply the following code as you wish
+|
+*/
+
+$tmp_storage = sys_get_temp_dir() . DIRECTORY_SEPARATOR . env('APP_NAME') . '-storage-' . php_sapi_name();
+if (!is_dir($tmp_storage)) {
+    mkdir($tmp_storage);
+}
+$app->useStoragePath($tmp_storage);
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +100,8 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('api');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -76,9 +118,10 @@ $app->configure('app');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+     'cors' => palanik\lumen\Middleware\LumenCors::class
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -92,8 +135,18 @@ $app->configure('app');
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+
+
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
+
+$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+
+// laravel-log-viewer
+$app->register(Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -109,7 +162,8 @@ $app->configure('app');
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/api.php';
+    require __DIR__ . '/../routes/web.php';
 });
 
 return $app;
