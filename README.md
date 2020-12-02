@@ -3,11 +3,11 @@
 ** 只是将lumen的常用的扩展做成自定义安装的形式  **
 
 # 目录
-1. 安装(#安装)
-2. 说明(#说明)
-3. 配置(#配置)
+1. <a href="#install">安装</a>
+2. <a href="#instructions">说明</a>
+3. <a href="#configure">配置</a>
 
-### <span id="安装">安装</span>
+### <span id="install">安装</span>
 
 1. 通过composer创建项目(推荐)
 
@@ -19,7 +19,7 @@
 
 `composer run-script pre-install-cmd`
 
-### <span id="说明">说明</span>
+### <span id="instructions">说明</span>
 
 1. Dingo-Api
 
@@ -34,7 +34,7 @@
 
 	[开源的实时错误报告工具](https://docs.sentry.io/platforms/php/ "开源的实时错误报告工具")
 
-### <span id="配置">配置</span>
+### <span id="configure">配置</span>
 
 - Dingo-Api
 
@@ -66,3 +66,5 @@
     取消 `$app->register(App\Providers\AuthServiceProvider::class);` 的注释;
 
     添加 `$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);` ;
+[安装]: #安装 "安装跳转"
+[configure]: #configure "配置"
