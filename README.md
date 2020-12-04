@@ -68,3 +68,7 @@
     添加 `$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);` ;
 [安装]: #安装 "安装跳转"
 [configure]: #configure "配置"
+
+- Swagger-lumen
+
+    参考 [Lumen 微服务生成 Swagger 文档](https://learnku.com/articles/21886)

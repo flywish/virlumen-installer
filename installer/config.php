@@ -25,6 +25,9 @@ return [
         ],
         'microsoft/azure-storage-blob' => [
             'version' => '^1.5'
+        ],
+        'darkaonline/swagger-lume' => [
+            'version' => '8.*'
         ]
     ],
     'require-dev' => [
@@ -72,10 +75,6 @@ return [
                     'resources' => [
                         'resources/jwt-auth/auth.php' => 'config/auth.php',
                         'resources/jwt-auth/jwt.php' => 'config/jwt.php',
-                    ],
-                    'env' => [
-                        'JWT_SECRET ' => '',
-                        'JWT_TTL' => 60
                     ]
                 ],
             ],
@@ -186,6 +185,24 @@ return [
                         'AZURE_ENDPOINT' => '',
                         'AZURE_CONTAINER' => ''
                     ]
+                ],
+            ],
+        ],
+        'apidoc' => [
+            'question' => 'Which tool do you want to use to generate online documentation ?',
+            'default' => '1',
+            'required' => false,
+            'custom-package' => true,
+            'options' => [
+                '1' => [
+                    'name' => 'swagger-lumen',
+                    'packages' => [
+                        'darkaonline/swagger-lume'
+                    ]
+                ],
+                '2' => [
+                    'name' => 'dingoApi-doc',
+                    'packages' => []
                 ],
             ],
         ],
