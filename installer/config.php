@@ -160,7 +160,8 @@ return [
                         'aliyuncs/oss-sdk-php',
                     ],
                     'resources' => [
-                        'resources/oss/alioss.php' => 'config/alioss.php',
+                        'resources/oss/config/alioss.php' => 'config/alioss.php',
+                        'resources/oss/Service/AliOssService.php' => 'app/Service/Common/AliOssService.php',
                     ],
                     'env' => [
                         'ALIOSS_SERVER' => '',
@@ -178,7 +179,9 @@ return [
                     'packages' => [
                         'microsoft/azure-storage-blob',
                     ],
-                    'resources' => [],
+                    'resources' => [
+                        'resources/oss/Service/AzureOssService.php' => 'app/Service/Common/AzureOssService.php',
+                    ],
                     'env' => [
                         'AZURE_ACCOUNT_NAME' => '',
                         'AZURE_ACCOUNT_KEY' => '',
