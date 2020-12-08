@@ -17,9 +17,6 @@ return [
         'palanik/lumen-cors' => [
             'version' => '^0.0.3'
         ],
-        'alibabacloud/client' => [
-            'version' => '^1.5'
-        ],
         'aliyuncs/oss-sdk-php' => [
             'version' => '^2.3'
         ],
@@ -156,8 +153,7 @@ return [
                 '1' => [
                     'name' => 'aliyun-oss',
                     'packages' => [
-                        'alibabacloud/client',
-                        'aliyuncs/oss-sdk-php',
+                        'aliyuncs/oss-sdk-php'
                     ],
                     'resources' => [
                         'resources/oss/config/alioss.php' => 'config/alioss.php',
