@@ -197,11 +197,13 @@ return [
                     'name' => 'swagger-lumen',
                     'packages' => [
                         'darkaonline/swagger-lume'
-                    ]
+                    ],
+                    'resources' => []
                 ],
                 '2' => [
                     'name' => 'dingoApi-doc',
-                    'packages' => []
+                    'packages' => [],
+                    'resources' => []
                 ],
             ],
         ],
