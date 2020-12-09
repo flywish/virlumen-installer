@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Common;
 
 use OSS\OssClient;
 
-class AliOss
+class AliOssService
 {
 
     public $ossClient;
@@ -12,9 +12,9 @@ class AliOss
 
     public function __construct($isInternal = false)
     {
-        $serverAddress = $isInternal ? config('alioss.ossServerInternal') : config('alioss.ossServer');
-        $this->ossClient = new OssClient(config('alioss.AccessKeyId'), config('alioss.AccessKeySecret'), $serverAddress);
-        $this->bucketName = config('alioss.BucketName');
+        $serverAddress = $isInternal ? config('alioss.ossServerInternal','') : config('alioss.ossServer','');
+        $this->ossClient = new OssClient(config('alioss.AccessKeyId',''), config('alioss.AccessKeySecret',''), $serverAddress);
+        $this->bucketName = config('alioss.BucketName','');
     }
 
     /**
@@ -36,7 +36,7 @@ class AliOss
      */
     public function signUrl($object)
     {
-        return $this->ossClient->signUrl($this->bucketName, $object, env('ALIOSS_EXPIRE_TIME',3600));
+        return $this->ossClient->signUrl($this->bucketName, $object, config('alioss.SignExpireTime',3600));
     }
 
 }

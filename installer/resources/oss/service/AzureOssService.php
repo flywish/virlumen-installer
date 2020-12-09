@@ -17,9 +17,9 @@ class AzureOssService
 
     public function __construct()
     {
-        $this->accountName = env('AZURE_ACCOUNT_NAME');
-        $this->accountKey = env('AZURE_ACCOUNT_KEY');
-        $this->endpoint = env('AZURE_ENDPOINT');
+        $this->accountName = config('azureoss.AccountName','');
+        $this->accountKey = config('azureoss.AccountKey','');
+        $this->endpoint = config('azureoss.AZURE_ENDPOINT','');
     }
 
     public function getBlobClient()

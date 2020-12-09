@@ -176,6 +176,7 @@ return [
                         'microsoft/azure-storage-blob',
                     ],
                     'resources' => [
+                        'resources/oss/config/azureoss.php' => 'config/azureoss.php',
                         'resources/oss/Service/AzureOssService.php' => 'app/Service/Common/AzureOssService.php',
                     ],
                     'env' => [
